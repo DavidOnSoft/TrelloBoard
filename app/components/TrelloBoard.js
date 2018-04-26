@@ -41,4 +41,4 @@ class TrelloBoard extends Component {
 }
 TrelloBoard.propTypes = { cards: PropTypes.arrayOf(PropTypes.object) };
 
-export default DragDropContext(HTML5Backend)(TrellonBoard);
+export default DragDropContext(HTML5Backend)(TrelloBoard);

@@ -16,22 +16,13 @@ let titlePropType = (props, propName, componentName) => {
     }
 }
 const cardDragSpec = {
-    beginDrag(props) {
-        return {
-            id: props.id,
-            status: props.status
-        };
-    },
-    endDrag(props) {
-        CardActionCreators.persistCardDrag(props);
-    }
-}
-const cardDropSpec = {
-    hover(props, monitor) {
-        const draggedId = monitor.getItem().id;
-        CardActionCreators.updateCardPosition(draggedId, props.id);
-    }
-}
+    beginDrag(props) { return { id: props.id, status: props.status }; },
+
+    endDrag(props) { CardActionCreators.persistCardDrag(props); }
+};
+
+const cardDropSpec = { hover(props, monitor) { const draggedId = monitor.getItem().id; if (props.id !== draggedId) { CardActionCreators.updateCardPosition(draggedId, props.id); } } }
+
 
 
 let collectDrag = (connect, monitor) => { return { connectDragSource: connect.dragSource() }; }
@@ -74,16 +65,8 @@ class Card extends Component {
                         }
                         onClick = { this.toggleDetails.bind(this) } > { this.props.title } < /div>        <ReactCSSTransitionGroup transitionName="toggle"                                 transitionEnterTimeout={250}                                 transitionLeaveTimeout={250} >        {cardDetails}        </
                         ReactCSSTransitionGroup > < /div>    ));  } } 
-                        Card.propTypes = {
-                            id: PropTypes.number,
-                            title: titlePropType,
-                            description: PropTypes.string,
-                            color: PropTypes.string,
-                            tasks: PropTypes.array,
-                            connectDragSource: PropTypes.func.isRequired,
-                            connectDropTarget: PropTypes.func.isRequired
-                        };
+                        Card.propTypes = { id: PropTypes.number, title: titlePropType, description: PropTypes.string, color: PropTypes.string, tasks: PropTypes.array, status: PropTypes.string, connectDragSource: PropTypes.func.isRequired, connectDropTarget: PropTypes.func.isRequired }
 
                         const dragHighOrderCard = DragSource(constants.CARD, cardDragSpec, collectDrag)(Card);
                         const dragDropHighOrderCard = DropTarget(constants.CARD, cardDropSpec, collectDrop)(dragHighOrderCard);
-                        export default dragDropHighOrderCard;
+                        export default dragDropHighOrderCard

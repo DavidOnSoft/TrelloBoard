@@ -20,5 +20,5 @@ class TrelloBoardContainer extends Component {
 TrelloBoardContainer.getStores = () => ([CardStore]);
 TrelloBoardContainer.calculateState = (prevState) => ({
     cards: CardStore.getState()
-})
+});
 export default Container.create(TrelloBoardContainer);

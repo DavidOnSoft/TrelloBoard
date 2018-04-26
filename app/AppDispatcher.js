@@ -10,15 +10,15 @@ class AppDispatcher extends Dispatcher {
                 type: success,
                 payload: Object.assign({}),
                 payload,
-                { response }
+                response
             }),
             error => this.dispatch({
-                    type: failure,
-                    payload: Object.assign({}),
-                    payload,
-                    { error })
+                type: failure,
+                payload: Object.assign({}),
+                payload,
+                error
             })
-    );
-}
+        );
+    }
 }
 export default new AppDispatcher();
