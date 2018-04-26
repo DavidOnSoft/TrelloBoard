@@ -8,7 +8,16 @@ import EditCard from '../components/EditCard';
 import NewCard from '../components/NewCard';
 
 
-render(( < Router history = { createBrowserHistory() } > < Route component = { TrelloBoardContainer } > < Route path = "/"
-            component = { TrelloBoard } > < Route path = "new"
-            component = { NewCard }
-            />        <Route path="edit/: card_id " component={EditCard} />      </Route>    </Route>  </Router> ), document.getElementById('root'));
+render(
+    (
+        <Router history={ createBrowserHistory() }>
+            <div>
+                <Route component={ TrelloBoardContainer }/>
+                <Route path="/" component = { TrelloBoard }/>
+                <Route path="new" component = { NewCard }/>
+                <Route path="edit/:card_id " component={EditCard} />
+            </div>
+        </Router>
+    ),
+    document.getElementById('root')
+);

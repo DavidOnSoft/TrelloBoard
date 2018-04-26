@@ -6,19 +6,23 @@ import CardStore from '../stores/CardStore';
 
 class TrelloBoardContainer extends Component {
 
+    constructor() {
+        super(...arguments);
+        this.state = {
+            cards: []
+        }
+    }
+
     componentDidMount() {
         CardActionCreators.fetchCards();
     }
     render() {
-        let TrelloBoard = this.props.children && React.cloneElement(this.props.children, {
-            cards: this.state.cards
-        });
-        return TrelloBoard;
+        return (<TrelloBoard cards={this.state.cards}/>);
     }
 
 }
 TrelloBoardContainer.getStores = () => ([CardStore]);
 TrelloBoardContainer.calculateState = (prevState) => ({
     cards: CardStore.getState()
-})
+});
 export default Container.create(TrelloBoardContainer);

@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import 'babel-polyfill';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3500';
 const API_HEADERS = {
     'Content-Type': 'application/json'
 };
@@ -18,7 +18,7 @@ let TrelloAPI = {
                 headers: API_HEADERS,
                 body: JSON.stringify(card)
             })
-            .then((response) => response.json())
+            .then((response) => response.json());
     },
     addTask(cardId, task) {
         return fetch("${API_URL}/cards/${cardId}/tasks", {
@@ -26,7 +26,7 @@ let TrelloAPI = {
                 headers: API_HEADERS,
                 body: JSON.stringify(trask)
             })
-            .then((response) => response.json())
+            .then((response) => response.json());
     }
 };
 export default TrelloAPI;

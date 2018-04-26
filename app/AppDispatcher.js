@@ -6,18 +6,18 @@ class AppDispatcher extends Dispatcher {
         const { request, success, failure } = types;
         this.dispatch({ type: request, payload: Object.assign({}, payload) });
         promise.then(
-            response => this.dispatch({
-                type: success,
-                payload: Object.assign({}),
-                payload,
-                { response }
-            }),
-            error => this.dispatch({
+            (response) => {
+                this.dispatch({
+                    type: success,
+                    payload: Object.assign({}, payload)
+                });
+            },
+            (error) => {
+                this.dispatch({
                     type: failure,
-                    payload: Object.assign({}),
-                    payload,
-                    { error })
-            })
+                    payload: Object.assign({}, payload)
+                })
+            }
     );
 }
 }
