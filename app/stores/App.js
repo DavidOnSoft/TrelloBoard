@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route } from 'react-router';
+//import { BrowserRouter } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import TrelloBoardContainer from '../components/TrelloBoardContainer';
 import TrelloBoard from '../components/TrelloBoard';
