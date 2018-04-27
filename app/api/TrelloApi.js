@@ -9,7 +9,7 @@ const API_HEADERS = {
 let TrelloAPI = {
 
     fetchCards() {
-        return fetch(`${API_URL}/cards`, { headers: API_HEADERS })
+        return fetch(`${API_URL}/cards`, { headers: API_HEADERS,mode:'no-cors' })
             .then((response) => response.json())
     },
 

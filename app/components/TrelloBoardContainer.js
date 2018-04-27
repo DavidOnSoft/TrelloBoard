@@ -14,8 +14,10 @@ class TrelloBoardContainer extends Component {
     }
 
     componentDidMount() {
-        CardActionCreators.fetchCards();
+        const results = CardActionCreators.fetchCards();
+        console.log('TrelloBoardContainer.componentDidMount()', results);
     }
+
     render() {
         return (<TrelloBoard cards={this.state.cards}/>);
     }

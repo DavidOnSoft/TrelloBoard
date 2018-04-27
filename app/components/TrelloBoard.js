@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { Link } from 'react-router-dom';
 import List from './List';
+import CardStore from "../stores/CardStore";
 
 
 class TrelloBoard extends Component
@@ -11,16 +12,16 @@ class TrelloBoard extends Component
     constructor() {
         super(...arguments);
         this.state = {
-            cards : [],
-            children : null,
+            cards : CardStore.getInitialState()
         };
     }
 
     componentDidMount() {
-        this.setState({
-            cards: this.props.cards,
-            children : this.props.children
-        });
+        if (this.props.cards !== undefined) {
+            this.setState({
+                cards: this.props.cards
+            });
+        }
     }
 
     render() {
@@ -30,8 +31,8 @@ class TrelloBoard extends Component
                 <List id='todo'title="To Do" cards={ this.state.cards.filter((card) => card.status === "todo") }/>
                 <List id='in-progress' title="In Progress" cards={ this.state.cards.filter((card) => card.status === "in-progress") }/>
                 <List id='done' title = 'Done' cards = { this.state.cards.filter((card) => card.status === "done")}/>
-                { this.state.children }
-            </div >
+                { this.props.children }
+            </div>
         );
     }
 }
