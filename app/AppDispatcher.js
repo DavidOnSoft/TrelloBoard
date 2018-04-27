@@ -1,10 +1,10 @@
 import { Dispatcher } from 'flux';
 import 'babel-polyfill';
 
-class AppDispatcher extends Dispatcher {
+export default class AppDispatcher extends Dispatcher {
     dispatchAsync(promise, types, payload) {
-        const { request, success, failure } = types;
-        this.dispatch({ type: request, payload: Object.assign({}, payload) });
+        const {request, success, failure} = types;
+        this.dispatch({type: request, payload: Object.assign({}, payload)});
         promise.then(
             (response) => {
                 this.dispatch({
@@ -18,6 +18,6 @@ class AppDispatcher extends Dispatcher {
                     payload: Object.assign({}, payload)
                 })
             }
-    );
+        );
+    }
 }
-export default new AppDispatcher();

@@ -1,10 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CardForm from './CardForm';
 import CardActionCreators from '../actions/CardActionCreators';
 
 class NewCard extends Component {
 
-    componentWillMount() { this.setState({ id: Date.now(), title: '', description: '', status: 'todo', color: '#c9c9c9', tasks: [] }); }
+    componentWillMount() {
+        this.setState({ id: Date.now(), title: '', description: '', status: 'todo', color: '#c9c9c9', tasks: [] })
+    }
+
     handleChange(field, value) {
         this.setState({
             [field]: value
@@ -16,16 +20,25 @@ class NewCard extends Component {
         CardActionCreators.addCard(this.state);
         this.props.history.pushState(null, '/');
     }
-    handleClose(e) { this.props.history.pushState(null, '/'); }
+
+    handleClose(e) {
+        this.props.history.pushState(null, '/');
+    }
 
 
     render() {
-            return ( < CardForm draftCard = { this.state }
-                    buttonLabel = "Create Card"
-                    handleChange = { this.handleChange.bind(this) }
-                    handleSubmit = { this.handleSubmit.bind(this) }
-                    handleClose = { this.handleClose.bind(this) }
-                    />    );  } }
+            return (
+                <CardForm draftCard={ this.state }
+                          buttonLabel="Create Card"
+                          handleChange = { this.handleChange.bind(this) }
+                          handleSubmit = { this.handleSubmit.bind(this) }
+                          handleClose = { this.handleClose.bind(this) }/>
+            );
+    }
+}
 
-                    NewCard.propTypes = { cardCallbacks: PropTypes.object };
-                    export default NewCard;
+NewCard.propTypes = {
+    cardCallbacks: PropTypes.object
+};
+
+export default NewCard;

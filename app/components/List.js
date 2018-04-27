@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import Card from './Card';
-import constants from '../stores/constants';
 import CardActionCreators from '../actions/CardActionCreators';
+import constants from "../stores/constants";
 
 const listTargetSpec = {
     hover(props, monitor) {
@@ -11,18 +12,32 @@ const listTargetSpec = {
     }
 };
 
-function collect(connect, monitor) { return { connectDropTarget: connect.dropTarget() }; }
-class List extends Component {
+function collect(connect, monitor) {
+    return { connectDropTarget: connect.dropTarget() };
+}
+class List extends Component
+{
     render() {
-            const { connectDropTarget } = this.props;
+        const { connectDropTarget } = this.props;
 
-            let cards = this.props.cards.map((card) => {
-                    return <Card key = { card.id } {...card }
-                    />    });
+        let cards = this.props.cards.map((card) => {
+            return <Card key = { card.id } {...card }/>
+        });
 
-                    return connectDropTarget( < div className = "list" > < h1 > { this.props.title } < /h1>        {cards}      </div > );
-                }
-            }
-            List.propTypes = { id: PropTypes.string.isRequired, title: PropTypes.string.isRequired, cards: PropTypes.arrayOf(React.PropTypes.object), connectDropTarget: PropTypes.func.isRequired }
+        return connectDropTarget(
+            <div className="list">
+                <h1>{ this.props.title }</h1>
+                { cards }
+            </div >
+        );
+    }
+}
 
-            export default DropTarget(constants.CARD, listTargetSpec, collect)(List);
+List.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    cards: PropTypes.arrayOf(PropTypes.object),
+    connectDropTarget: PropTypes.func.isRequired
+};
+
+export default DropTarget(constants.CARD, listTargetSpec, collect)(List);
